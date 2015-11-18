@@ -39,7 +39,7 @@ describe('Promises', () => {
         });
 
         describe('Merge', () => {
-            it('should return a object containing the passed in object and the data of the passes in promise', () => {
+            it('should merge the data of the promises passed in', () => {
                 return promiseMethods.merge([Promise.resolve({
                     foo: 'bar'
                 }), Promise.resolve({
