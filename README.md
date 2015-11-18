@@ -1,5 +1,7 @@
 # Node Challenges
 
+*Requires Node >= 4*
+
 Work through the tests one by one, complete the methods in the answers folder to make them pass.
 
 Run the tests using ```npm test```
