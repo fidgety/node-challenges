@@ -1,3 +1,6 @@
 module.exports = {
-    toPromise: function () {}
+    toPromise: function () {},
+    throw: function () {},
+    mixed: function () {},
+    merge: function () {},
 };
