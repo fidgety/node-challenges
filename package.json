@@ -1,0 +1,28 @@
+{
+  "name": "node-challenges",
+  "version": "1.0.0",
+  "description": "Node challenges...",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "NODE_ENV=answers mocha tests/*",
+    "solutions": "NODE_ENV=solutions mocha tests/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexMeah/node-challenges.git"
+  },
+  "author": "Alex Meah <hi@alexmeah.com> (http://alexmeah.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexMeah/node-challenges/issues"
+  },
+  "homepage": "https://github.com/AlexMeah/node-challenges#readme",
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4",
+    "nock": "^3.1.0"
+  }
+}
