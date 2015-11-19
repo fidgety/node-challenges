@@ -14,15 +14,20 @@ describe('Promises', () => {
 
     describe('Advanced', () => {
         describe('Mixed', () => {
-            it('should return a object containing the passed in object and the data of the passes in promise', () => {
-                return promiseMethods.mixed(Promise.resolve({
-                    fizz: 'buzz'
-                }), {
-                    foo: 'bar'
-                }).then((data) => data.should.deep.equal({
-                    foo: 'bar',
-                    fizz: 'buzz'
-                }));
+            describe('Given an array which contains both normal objects and Promises which return objects', () => {
+                it('should merge the objects and return the result', () => {
+                    return promiseMethods.mixed([Promise.resolve({
+                        fizz: 'buzz'
+                    }), Promise.resolve({
+                        snap: 'crackle'
+                    }), {
+                        foo: 'bar'
+                    }]).then((data) => data.should.deep.equal({
+                        foo: 'bar',
+                        snap: 'crackle',
+                        fizz: 'buzz'
+                    }));
+                });
             });
         });
 

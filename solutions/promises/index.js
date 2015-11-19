@@ -2,10 +2,9 @@ module.exports = {
     toPromise: function (value) {
         return Promise.resolve(value);
     },
-    mixed: function (promiseFn, obj) {
-        return promiseFn.then((data) => {
-            return Object.assign({}, obj, data);
-        });
+    mixed: function (values) {
+        return Promise.all(values.map((value) => Promise.resolve(value)))
+            .then((result) => Object.assign.apply(null, result));
     },
     merge: function (promises) {
         return Promise.all(promises).then((data) => {
