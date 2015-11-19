@@ -10,18 +10,6 @@ describe('Promises', () => {
                 return promiseMethods.toPromise('a').then((data) => data.should.equal('a'));
             });
         });
-
-        describe('throw', () => {
-            it('should re-throw an error from a catch', () => {
-                return Promise.resolve('value').then(() => {
-                    throw new Error('Oops!');
-                }).catch(promiseMethods.throw).then(() => {
-                    throw new Error('You didn\'t throw!');
-                }).catch(err => {
-                    err.message.should.equal('Oops!');
-                });
-            });
-        });
     });
 
     describe('Advanced', () => {
