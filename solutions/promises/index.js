@@ -1,4 +1,7 @@
-module.exports = {
+var fs = require('fs');
+var path = require('path');
+
+var solutions = module.exports = {
     toPromise: function (value) {
         return Promise.resolve(value);
     },
@@ -31,5 +34,24 @@ module.exports = {
                 fn.apply(this, args)
             });
         }
+    },
+    manipulate: function () {
+        var readFile = solutions.promisify(fs.readFile);
+        var readDir = solutions.promisify(fs.readdir);
+        var basePath = __dirname + '/../../fixtures/posts/';
+
+        return readDir(basePath)
+            .then((files) => files.filter((file) => file.charAt(0) !== '.')) // Filter out dotfiles
+            .then((files) => files.map((file) => {
+                return readFile(basePath + file, 'utf8')
+                    .then((content) => {
+                        var key = path.basename(file, '.txt');
+
+                        return {
+                            [key]: content.toUpperCase().trim()
+                        };
+                    });
+            }))
+            .then((posts) => Promise.all(posts));
     }
 };

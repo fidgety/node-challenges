@@ -1,4 +1,6 @@
-require('chai').should();
+var chai = require('chai');
+chai.should();
+chai.use(require('chai-things'));
 var path = require('path');
 
 var promiseMethods = require(path.join('../../', process.env.NODE_ENV, '/promises'));
@@ -67,6 +69,18 @@ describe('Promises', () => {
                         cb(null, str1 + ' ' + str2);
                     });
                 })('hello', 'there').then((data) => data.should.equal('hello there'));
+            });
+        });
+
+        describe('Manipulating data return by a promise', () => {
+            // This relies on the promisify function, please complete that first
+            describe('Read each file in fixtures/posts', () => {
+                it('should return an array of objects containing {filename: fileContents} fileContents should be uppercase and trimmed', () => {
+                    return promiseMethods.manipulate().then((posts) => {
+                        posts.should.include.something.that.deep.equals({ foo: 'BAR' });
+                        posts.should.include.something.that.deep.equals({ fizz: 'BUZZ' });
+                    })
+                });
             });
         });
     });
