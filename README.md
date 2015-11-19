@@ -1,4 +1,4 @@
-# Node Challenges
+# Node Challenges [![Circle CI](https://circleci.com/gh/AlexMeah/node-challenges/tree/master.svg?style=svg)](https://circleci.com/gh/AlexMeah/node-challenges/tree/master)
 
 *Requires Node >= 4*
 
