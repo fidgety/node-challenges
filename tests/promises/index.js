@@ -38,5 +38,31 @@ describe('Promises', () => {
                 }));
             });
         });
+
+        describe('Promisify', () => {
+            it('should turn a node style callback function into a Promise', () => {
+                return promiseMethods.promisify(function (str, cb) {
+                    setTimeout(() => {
+                        cb(null, str);
+                    });
+                })('hello').then((data) => data.should.equal('hello'));
+            });
+
+            it('should handle errors', () => {
+                return promiseMethods.promisify(function (cb) {
+                    setTimeout(() => {
+                        cb(new Error('Oh no!'));
+                    });
+                })().catch((err) => err.message.should.equal('Oh no!'));
+            });
+
+            it('should handle multiple args', () => {
+                return promiseMethods.promisify(function (str1, str2, cb) {
+                    setTimeout(() => {
+                        cb(null, str1 + ' ' + str2);
+                    });
+                })('hello', 'there').then((data) => data.should.equal('hello there'));
+            });
+        });
     });
 });
