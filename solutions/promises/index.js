@@ -1,24 +1,26 @@
-var fs = require('fs');
-var path = require('path');
+'use strict';
 
-var solutions = module.exports = {
-    toPromise: function (value) {
+const fs = require('fs');
+const path = require('path');
+
+const solutions = module.exports = {
+    toPromise: function(value) {
         return Promise.resolve(value);
     },
-    mixed: function (values) {
+    mixed: function(values) {
         return Promise.all(values.map((value) => Promise.resolve(value)))
             .then((result) => Object.assign.apply(null, result));
     },
-    merge: function (promises) {
+    merge: function(promises) {
         return Promise.all(promises).then((data) => {
             return Object.assign.apply(null, data);
         });
     },
-    promisify: function (fn) {
-        return function () {
-            var args = new Array(arguments.length);
+    promisify: function(fn) {
+        return function() {
+            const args = new Array(arguments.length);
 
-            for (var i = 0; i < arguments.length; i++) {
+            for (let i = 0; i < arguments.length; i++) {
                 args[i] = arguments[i];
             }
 
@@ -31,21 +33,21 @@ var solutions = module.exports = {
                     resolve(result);
                 });
 
-                fn.apply(this, args)
+                fn.apply(this, args);
             });
-        }
+        };
     },
-    manipulate: function () {
-        var readFile = solutions.promisify(fs.readFile);
-        var readDir = solutions.promisify(fs.readdir);
-        var basePath = __dirname + '/../../fixtures/posts/';
+    manipulate: function() {
+        const readFile = solutions.promisify(fs.readFile);
+        const readDir = solutions.promisify(fs.readdir);
+        const basePath = __dirname + '/../../fixtures/posts/';
 
         return readDir(basePath)
             .then((files) => files.filter((file) => file.charAt(0) !== '.')) // Filter out dotfiles
             .then((files) => files.map((file) => {
                 return readFile(basePath + file, 'utf8')
                     .then((content) => {
-                        var key = path.basename(file, '.txt');
+                        const key = path.basename(file, '.txt');
 
                         return {
                             [key]: content.toUpperCase().trim()

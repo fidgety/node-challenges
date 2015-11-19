@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "NODE_ENV=answers mocha tests/*",
-    "solutions": "NODE_ENV=solutions mocha tests/*"
+    "solutions": "eslint . && NODE_ENV=solutions mocha tests/*"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,9 @@
   "devDependencies": {
     "chai": "^3.4.1",
     "chai-things": "^0.2.0",
+    "eslint": "^1.9.0",
+    "eslint-config-airbnb": "^1.0.0",
     "mocha": "^2.3.4",
-    "nock": "^3.1.0"
+    "nock": "^3.1.1"
   }
 }

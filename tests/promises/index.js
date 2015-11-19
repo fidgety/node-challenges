@@ -1,9 +1,11 @@
-var chai = require('chai');
+'use strict';
+
+const chai = require('chai');
 chai.should();
 chai.use(require('chai-things'));
-var path = require('path');
+const path = require('path');
 
-var promiseMethods = require(path.join('../../', process.env.NODE_ENV, '/promises'));
+const promiseMethods = require(path.join('../../', process.env.NODE_ENV, '/promises'));
 
 describe('Promises', () => {
     describe('Basic', () => {
@@ -48,7 +50,7 @@ describe('Promises', () => {
 
         describe('Promisify', () => {
             it('should turn a node style callback function into a Promise', () => {
-                return promiseMethods.promisify(function (str, cb) {
+                return promiseMethods.promisify(function(str, cb) {
                     setTimeout(() => {
                         cb(null, str);
                     });
@@ -56,7 +58,7 @@ describe('Promises', () => {
             });
 
             it('should handle errors', () => {
-                return promiseMethods.promisify(function (cb) {
+                return promiseMethods.promisify(function(cb) {
                     setTimeout(() => {
                         cb(new Error('Oh no!'));
                     });
@@ -64,7 +66,7 @@ describe('Promises', () => {
             });
 
             it('should handle multiple args', () => {
-                return promiseMethods.promisify(function (str1, str2, cb) {
+                return promiseMethods.promisify(function(str1, str2, cb) {
                     setTimeout(() => {
                         cb(null, str1 + ' ' + str2);
                     });
@@ -79,7 +81,7 @@ describe('Promises', () => {
                     return promiseMethods.manipulate().then((posts) => {
                         posts.should.include.something.that.deep.equals({ foo: 'BAR' });
                         posts.should.include.something.that.deep.equals({ fizz: 'BUZZ' });
-                    })
+                    });
                 });
             });
         });
