@@ -1,9 +1,5 @@
 'use strict';
 
-const answers = module.exports = {
-    toPromise: function() {},
-    mixed: function() {},
-    merge: function() {},
-    promisify: function() {},
-    manipulate: function() {}
-};
+const requireDirectory = require('require-directory');
+
+module.exports = requireDirectory(module);
